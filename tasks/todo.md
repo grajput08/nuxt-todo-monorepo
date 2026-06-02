@@ -19,7 +19,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 - [x] **Task 2:** `@symb-abm/shared` — types, utils, Vitest (≥90% on pure fns)
   - **Verify:** `pnpm --filter @symb-abm/shared test`
 
-- [ ] **Task 3:** Nuxt 3 app shell (`apps/web`) + Pinia + shared link
+- [x] **Task 3:** Nuxt 3 app shell (`apps/web`) + Pinia + shared link
   - **Verify:** `pnpm dev`, `pnpm --filter web build`
 
 - [ ] **Task 4:** ESLint, Prettier, Husky, lint-staged
