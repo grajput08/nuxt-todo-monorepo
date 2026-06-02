@@ -10,7 +10,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 
 - [x] **Task 1:** Initialize monorepo + GitHub repository
   - **Accept:** `pnpm-workspace.yaml`, root `package.json`, `.nvmrc`, `SPEC.md`, README
-  - **Verify:** `pnpm install` succeeds; repo on GitHub (push pending `gh auth login`)
+  - **Verify:** `pnpm install` succeeds; https://github.com/grajput08/nuxt-todo-monorepo
 
 ---
 

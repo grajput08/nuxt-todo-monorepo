@@ -41,8 +41,7 @@ packages/shared/    # @symb-abm/shared types and utilities
 Create the remote repository (if not already created), then:
 
 ```bash
-git remote add origin https://github.com/<org>/nuxt-todo-monorepo.git
-git push -u origin main
+Remote: `https://github.com/grajput08/nuxt-todo-monorepo`
 ```
 
 ## Status
