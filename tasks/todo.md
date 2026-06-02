@@ -16,7 +16,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 
 ## Phase 1: Foundation
 
-- [ ] **Task 2:** `@symb-abm/shared` — types, utils, Vitest (≥90% on pure fns)
+- [x] **Task 2:** `@symb-abm/shared` — types, utils, Vitest (≥90% on pure fns)
   - **Verify:** `pnpm --filter @symb-abm/shared test`
 
 - [ ] **Task 3:** Nuxt 3 app shell (`apps/web`) + Pinia + shared link

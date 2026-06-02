@@ -47,4 +47,5 @@ Remote: `https://github.com/grajput08/nuxt-todo-monorepo`
 ## Status
 
 - [x] Task 1: Monorepo bootstrap
-- [ ] Task 2+: See [tasks/todo.md](./tasks/todo.md)
+- [x] Task 2: `@symb-abm/shared` package
+- [ ] Task 3+: See [tasks/todo.md](./tasks/todo.md)

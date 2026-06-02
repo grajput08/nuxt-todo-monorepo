@@ -14,7 +14,7 @@
     "format": "node -e \"console.log('format: configured in Task 4')\"",
     "format:check": "pnpm format",
     "typecheck": "pnpm -r --if-present run typecheck",
-    "test": "node --test scripts/verify-monorepo.test.mjs",
+    "test": "node --test scripts/verify-monorepo.test.mjs && pnpm --filter @symb-abm/shared test",
     "test:e2e": "node -e \"console.log('e2e: configured in Task 13')\"",
     "prepare": "node -e \"console.log('husky: configured in Task 4')\""
   }
