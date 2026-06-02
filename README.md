@@ -13,7 +13,7 @@ Nuxt 3 + TypeScript todo app with `@symb-abm/shared`, Bootstrap, Pinia, `localSt
 ## Setup
 
 ```bash
-git clone https://github.com/<org>/nuxt-todo-monorepo.git
+git clone https://github.com/grajput08/nuxt-todo-monorepo.git
 cd nuxt-todo-monorepo
 corepack enable
 pnpm install
