@@ -1,0 +1,21 @@
+{
+  "name": "nuxt-todo-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.26.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm -r --if-present run build",
+    "lint": "node -e \"console.log('lint: configured in Task 4')\"",
+    "lint:fix": "pnpm lint",
+    "format": "node -e \"console.log('format: configured in Task 4')\"",
+    "format:check": "pnpm format",
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "test": "node --test scripts/verify-monorepo.test.mjs",
+    "test:e2e": "node -e \"console.log('e2e: configured in Task 13')\"",
+    "prepare": "node -e \"console.log('husky: configured in Task 4')\""
+  }
+}
