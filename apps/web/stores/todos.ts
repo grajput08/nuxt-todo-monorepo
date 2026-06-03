@@ -7,6 +7,7 @@ import {
   normalizeTitle,
   normalizeTags,
   sortByDueThenOrder,
+  sortByOrder,
 } from '@symb-abm/shared';
 import {
   PERSIST_DEBOUNCE_MS,
@@ -151,6 +152,33 @@ export const useTodosStore = defineStore('todos', () => {
     schedulePersist();
   }
 
+  function reorder(orderedIds: string[]): void {
+    if (orderedIds.length === 0) {
+      return;
+    }
+
+    const byId = new Map(todos.value.map((todo) => [todo.id, todo]));
+    const reordered = orderedIds
+      .map((id) => byId.get(id))
+      .filter((todo): todo is Todo => todo !== undefined);
+
+    if (reordered.length !== orderedIds.length) {
+      return;
+    }
+
+    const idSet = new Set(orderedIds);
+    const remaining = sortByOrder(todos.value.filter((todo) => !idSet.has(todo.id)));
+
+    todos.value = [
+      ...reordered.map((todo, index) => ({ ...todo, order: index })),
+      ...remaining.map((todo, index) => ({
+        ...todo,
+        order: reordered.length + index,
+      })),
+    ];
+    schedulePersist();
+  }
+
   function toggleSelectedTag(tag: string): void {
     if (selectedTags.value.includes(tag)) {
       selectedTags.value = selectedTags.value.filter((value) => value !== tag);
@@ -179,6 +207,7 @@ export const useTodosStore = defineStore('todos', () => {
     removeTodo,
     setFilter,
     clearCompleted,
+    reorder,
     toggleSelectedTag,
     clearSelectedTags,
   };

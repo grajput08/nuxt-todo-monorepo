@@ -24,6 +24,16 @@ describe('TodoItem', () => {
     expect(wrapper.emitted('toggle')).toEqual([['todo-1']]);
   });
 
+  it('renders a drag handle for reordering', () => {
+    const wrapper = mount(TodoItem, {
+      props: { todo },
+    });
+
+    const handle = wrapper.get('[data-testid="todo-drag-handle"]');
+    expect(handle.classes()).toContain('drag-handle');
+    expect(handle.attributes('aria-label')).toBe('Drag to reorder');
+  });
+
   it('emits edit when Edit is clicked', async () => {
     const wrapper = mount(TodoItem, {
       props: { todo },

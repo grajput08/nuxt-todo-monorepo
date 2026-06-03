@@ -15,6 +15,15 @@ defineEmits<{
 
 <template>
   <li class="list-group-item d-flex align-items-center gap-2">
+    <span
+      class="drag-handle text-muted flex-shrink-0 user-select-none"
+      role="button"
+      tabindex="0"
+      aria-label="Drag to reorder"
+      data-testid="todo-drag-handle"
+    >
+      ⠿
+    </span>
     <input
       class="form-check-input flex-shrink-0"
       type="checkbox"

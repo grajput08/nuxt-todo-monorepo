@@ -13,6 +13,7 @@ describe('Bootstrap setup', () => {
   it('declares bootstrap and popper dependencies', () => {
     const pkg = JSON.parse(readWeb('package.json'));
     expect(pkg.dependencies.bootstrap).toBeDefined();
+    expect(pkg.dependencies['vue-draggable-plus']).toBeDefined();
     expect(pkg.dependencies['@popperjs/core']).toBeDefined();
   });
 

@@ -25,6 +25,7 @@ describe('useTodosStore', () => {
   });
 
   afterEach(() => {
+    vi.clearAllTimers();
     vi.useRealTimers();
     vi.unstubAllGlobals();
   });
@@ -205,6 +206,27 @@ describe('useTodosStore', () => {
     const result = store.updateTodo(id, { title: '   ' });
     expect(result.ok).toBe(false);
     expect(store.todos[0]?.title).toBe('Keep');
+  });
+
+  it('reorders todos by id list and persists order', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('A');
+    store.addTodo('B');
+    store.addTodo('C');
+
+    const idA = store.todos.find((t) => t.title === 'A')!.id;
+    const idB = store.todos.find((t) => t.title === 'B')!.id;
+    const idC = store.todos.find((t) => t.title === 'C')!.id;
+
+    store.reorder([idC, idA, idB]);
+
+    expect(store.sortedTodos.map((t) => t.title)).toEqual(['C', 'A', 'B']);
+    expect(store.todos.map((t) => t.order)).toEqual([0, 1, 2]);
+
+    vi.advanceTimersByTime(300);
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '');
+    expect(saved.todos.map((t: { title: string }) => t.title)).toEqual(['C', 'A', 'B']);
   });
 
   it('toggles and removes todos', () => {
