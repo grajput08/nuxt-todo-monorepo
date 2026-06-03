@@ -80,7 +80,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 - [x] **Task 13:** Playwright — 4 E2E scenarios + `data-testid`s
   - **Verify:** `pnpm test:e2e`
 
-- [ ] **Task 14:** GitHub Actions `ci.yml`
+- [x] **Task 14:** GitHub Actions `ci.yml`
   - **Verify:** Actions green on push
 
 ### Checkpoint: CI
