@@ -63,6 +63,33 @@ export function sortByOrder(todos: Todo[]): Todo[] {
   return [...todos].sort((a, b) => a.order - b.order);
 }
 
+export function normalizeDueDate(value: string | null | undefined): string | null {
+  if (!value) {
+    return null;
+  }
+  const trimmed = value.trim();
+  if (!trimmed || !/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+    return null;
+  }
+  return trimmed;
+}
+
+/** Sort by due date ascending (dated items first), then by manual order. */
+export function sortByDueThenOrder(todos: Todo[]): Todo[] {
+  return [...todos].sort((a, b) => {
+    if (a.dueDate && b.dueDate && a.dueDate !== b.dueDate) {
+      return a.dueDate.localeCompare(b.dueDate);
+    }
+    if (a.dueDate && !b.dueDate) {
+      return -1;
+    }
+    if (!a.dueDate && b.dueDate) {
+      return 1;
+    }
+    return a.order - b.order;
+  });
+}
+
 export function isOverdue(todo: Todo, todayIsoDate: string = todayDateString()): boolean {
   if (!todo.dueDate || todo.completed) {
     return false;

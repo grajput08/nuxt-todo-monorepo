@@ -136,6 +136,17 @@ describe('useTodosStore', () => {
     expect(store.filter).toBe('active');
   });
 
+  it('persists due dates in localStorage', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('Due soon', { dueDate: '2026-07-01' });
+
+    vi.advanceTimersByTime(300);
+
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '');
+    expect(saved.todos[0].dueDate).toBe('2026-07-01');
+  });
+
   it('toggles and removes todos', () => {
     const store = useTodosStore();
     store.hydrate();

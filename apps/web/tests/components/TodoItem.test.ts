@@ -34,6 +34,24 @@ describe('TodoItem', () => {
     expect(wrapper.emitted('remove')).toEqual([['todo-1']]);
   });
 
+  it('shows due date and overdue styling for past incomplete todos', () => {
+    const wrapper = mount(TodoItem, {
+      props: { todo: { ...todo, dueDate: '2020-01-01' } },
+    });
+
+    expect(wrapper.get('[data-testid="todo-due-date"]').text()).toContain('2020-01-01');
+    expect(wrapper.get('[data-testid="todo-title"]').classes()).toContain('text-danger');
+    expect(wrapper.get('[data-testid="todo-due-date"]').classes()).toContain('text-danger');
+  });
+
+  it('clears overdue styling when completed', () => {
+    const wrapper = mount(TodoItem, {
+      props: { todo: { ...todo, dueDate: '2020-01-01', completed: true } },
+    });
+
+    expect(wrapper.get('[data-testid="todo-title"]').classes()).not.toContain('text-danger');
+  });
+
   it('strikes through completed todo titles', () => {
     const wrapper = mount(TodoItem, {
       props: { todo: { ...todo, completed: true } },

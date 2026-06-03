@@ -5,8 +5,10 @@ import {
   isOverdue,
   normalizeTag,
   normalizeTags,
+  normalizeDueDate,
   normalizeTitle,
   reindexOrders,
+  sortByDueThenOrder,
   sortByOrder,
 } from './todo-utils.js';
 
@@ -146,6 +148,30 @@ describe('isOverdue', () => {
 
 afterEach(() => {
   vi.useRealTimers();
+});
+
+describe('normalizeDueDate', () => {
+  it('returns null for empty or invalid values', () => {
+    expect(normalizeDueDate('')).toBeNull();
+    expect(normalizeDueDate('  ')).toBeNull();
+    expect(normalizeDueDate('06/02/2026')).toBeNull();
+    expect(normalizeDueDate(null)).toBeNull();
+  });
+
+  it('returns ISO date strings unchanged', () => {
+    expect(normalizeDueDate('2026-12-25')).toBe('2026-12-25');
+  });
+});
+
+describe('sortByDueThenOrder', () => {
+  it('sorts dated todos before undated, by due date then order', () => {
+    const todos = [
+      baseTodo({ id: 'c', dueDate: null, order: 0 }),
+      baseTodo({ id: 'b', dueDate: '2026-06-10', order: 2 }),
+      baseTodo({ id: 'a', dueDate: '2026-06-01', order: 1 }),
+    ];
+    expect(sortByDueThenOrder(todos).map((t) => t.id)).toEqual(['a', 'b', 'c']);
+  });
 });
 
 describe('reindexOrders', () => {

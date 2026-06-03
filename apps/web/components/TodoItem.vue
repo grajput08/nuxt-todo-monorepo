@@ -33,7 +33,14 @@ defineEmits<{
       >
         {{ todo.title }}
       </span>
-      <small v-if="todo.dueDate" class="d-block text-muted">{{ todo.dueDate }}</small>
+      <small
+        v-if="todo.dueDate"
+        class="d-block"
+        data-testid="todo-due-date"
+        :class="isOverdue(todo) ? 'text-danger' : 'text-muted'"
+      >
+        Due {{ todo.dueDate }}
+      </small>
       <span v-for="tag in todo.tags" :key="tag" class="badge bg-secondary me-1">{{ tag }}</span>
     </div>
     <button

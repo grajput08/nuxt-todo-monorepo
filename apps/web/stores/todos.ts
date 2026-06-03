@@ -1,7 +1,13 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import type { Todo, TodoFilter } from '@symb-abm/shared';
-import { filterTodos, normalizeTitle, normalizeTags, sortByOrder } from '@symb-abm/shared';
+import {
+  filterTodos,
+  normalizeDueDate,
+  normalizeTitle,
+  normalizeTags,
+  sortByDueThenOrder,
+} from '@symb-abm/shared';
 import {
   PERSIST_DEBOUNCE_MS,
   createDebouncedFn,
@@ -16,7 +22,7 @@ export const useTodosStore = defineStore('todos', () => {
   const hydrated = ref(false);
   const filter = ref<TodoFilter>('all');
 
-  const sortedTodos = computed(() => sortByOrder(todos.value));
+  const sortedTodos = computed(() => sortByDueThenOrder(todos.value));
 
   const filteredTodos = computed(() => filterTodos(sortedTodos.value, filter.value));
 
@@ -68,12 +74,12 @@ export const useTodosStore = defineStore('todos', () => {
       title: normalized.title,
       completed: false,
       createdAt: new Date().toISOString(),
-      dueDate: options.dueDate ?? null,
+      dueDate: normalizeDueDate(options.dueDate),
       tags: normalizeTags(options.tags ?? []),
       order: nextOrder(),
     };
 
-    todos.value = sortByOrder([...todos.value, todo]);
+    todos.value = sortByDueThenOrder([...todos.value, todo]);
     schedulePersist();
 
     return { ok: true, id: todo.id };

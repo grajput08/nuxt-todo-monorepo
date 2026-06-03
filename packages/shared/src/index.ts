@@ -7,8 +7,10 @@ export {
   isOverdue,
   normalizeTag,
   normalizeTags,
+  normalizeDueDate,
   normalizeTitle,
   reindexOrders,
+  sortByDueThenOrder,
   sortByOrder,
 } from './todo-utils.js';
 export type { NormalizeTitleResult } from './todo-utils.js';
