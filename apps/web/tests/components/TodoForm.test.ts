@@ -2,7 +2,16 @@ import { mount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, it } from 'vitest';
 import TodoForm from '../../components/TodoForm.vue';
+import TodoTagInput from '../../components/TodoTagInput.vue';
 import { useTodosStore } from '../../stores/todos';
+
+function mountTodoForm() {
+  return mount(TodoForm, {
+    global: {
+      components: { TodoTagInput },
+    },
+  });
+}
 
 describe('TodoForm', () => {
   beforeEach(() => {
@@ -11,7 +20,7 @@ describe('TodoForm', () => {
   });
 
   it('adds a todo when clicking Add with a valid title', async () => {
-    const wrapper = mount(TodoForm);
+    const wrapper = mountTodoForm();
     const input = wrapper.get('[data-testid="todo-title-input"]');
 
     await input.setValue('Buy milk');
@@ -23,7 +32,7 @@ describe('TodoForm', () => {
   });
 
   it('adds a todo when pressing Enter in the title field', async () => {
-    const wrapper = mount(TodoForm);
+    const wrapper = mountTodoForm();
     const input = wrapper.get('[data-testid="todo-title-input"]');
 
     await input.setValue('Walk dog');
@@ -32,8 +41,19 @@ describe('TodoForm', () => {
     expect(useTodosStore().todos).toHaveLength(1);
   });
 
+  it('adds a todo with tags', async () => {
+    const wrapper = mountTodoForm();
+
+    await wrapper.get('[data-testid="todo-title-input"]').setValue('Ship it');
+    await wrapper.get('[data-testid="tag-input"]').setValue('work');
+    await wrapper.get('[data-testid="tag-input"]').trigger('keydown.enter');
+    await wrapper.find('form').trigger('submit.prevent');
+
+    expect(useTodosStore().todos[0]?.tags).toEqual(['work']);
+  });
+
   it('adds a todo with an optional due date', async () => {
-    const wrapper = mount(TodoForm);
+    const wrapper = mountTodoForm();
 
     await wrapper.get('[data-testid="todo-title-input"]').setValue('Pay rent');
     await wrapper.get('[data-testid="todo-due-date-input"]').setValue('2026-06-15');
@@ -44,7 +64,7 @@ describe('TodoForm', () => {
   });
 
   it('shows an error for empty titles', async () => {
-    const wrapper = mount(TodoForm);
+    const wrapper = mountTodoForm();
 
     await wrapper.find('form').trigger('submit.prevent');
 

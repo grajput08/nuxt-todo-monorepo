@@ -32,6 +32,18 @@ describe('TodoFilters', () => {
     expect(store.filteredTodos).toHaveLength(1);
   });
 
+  it('filters by tag when a tag chip is clicked', async () => {
+    const store = useTodosStore();
+    store.addTodo('Tagged', { tags: ['work'] });
+    store.addTodo('Other');
+
+    const wrapper = mount(TodoFilters);
+    await wrapper.get('[data-testid="filter-tag-work"]').trigger('click');
+
+    expect(store.selectedTags).toEqual(['work']);
+    expect(store.filteredTodos.map((t) => t.title)).toEqual(['Tagged']);
+  });
+
   it('clears completed todos when Clear completed is clicked', async () => {
     const wrapper = mount(TodoFilters);
 

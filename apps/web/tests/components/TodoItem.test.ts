@@ -34,6 +34,16 @@ describe('TodoItem', () => {
     expect(wrapper.emitted('remove')).toEqual([['todo-1']]);
   });
 
+  it('renders tag badges', () => {
+    const wrapper = mount(TodoItem, {
+      props: { todo: { ...todo, tags: ['work', 'home'] } },
+    });
+
+    const badges = wrapper.findAll('[data-testid="todo-tag-badge"]');
+    expect(badges).toHaveLength(2);
+    expect(badges.map((b) => b.text())).toEqual(['work', 'home']);
+  });
+
   it('shows due date and overdue styling for past incomplete todos', () => {
     const wrapper = mount(TodoItem, {
       props: { todo: { ...todo, dueDate: '2020-01-01' } },

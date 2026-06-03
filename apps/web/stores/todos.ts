@@ -21,10 +21,23 @@ export const useTodosStore = defineStore('todos', () => {
   const todos = ref<Todo[]>([]);
   const hydrated = ref(false);
   const filter = ref<TodoFilter>('all');
+  const selectedTags = ref<string[]>([]);
 
   const sortedTodos = computed(() => sortByDueThenOrder(todos.value));
 
-  const filteredTodos = computed(() => filterTodos(sortedTodos.value, filter.value));
+  const filteredTodos = computed(() =>
+    filterTodos(sortedTodos.value, filter.value, selectedTags.value),
+  );
+
+  const availableTags = computed(() => {
+    const tags = new Set<string>();
+    for (const todo of todos.value) {
+      for (const tag of todo.tags) {
+        tags.add(tag);
+      }
+    }
+    return [...tags].sort();
+  });
 
   const counts = computed(() => {
     const total = todos.value.length;
@@ -106,11 +119,25 @@ export const useTodosStore = defineStore('todos', () => {
     schedulePersist();
   }
 
+  function toggleSelectedTag(tag: string): void {
+    if (selectedTags.value.includes(tag)) {
+      selectedTags.value = selectedTags.value.filter((value) => value !== tag);
+      return;
+    }
+    selectedTags.value = [...selectedTags.value, tag];
+  }
+
+  function clearSelectedTags(): void {
+    selectedTags.value = [];
+  }
+
   return {
     todos,
     sortedTodos,
     filteredTodos,
     filter,
+    selectedTags,
+    availableTags,
     counts,
     hydrated,
     hydrate,
@@ -119,5 +146,7 @@ export const useTodosStore = defineStore('todos', () => {
     removeTodo,
     setFilter,
     clearCompleted,
+    toggleSelectedTag,
+    clearSelectedTags,
   };
 });

@@ -136,6 +136,31 @@ describe('useTodosStore', () => {
     expect(store.filter).toBe('active');
   });
 
+  it('filters by selected tags combined with status filter', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('Work task', { tags: ['work'] });
+    store.addTodo('Home task', { tags: ['home'] });
+    store.addTodo('Both', { tags: ['work', 'urgent'] });
+    store.toggleTodo(store.todos.find((t) => t.title === 'Home task')!.id);
+
+    store.setFilter('active');
+    store.toggleSelectedTag('work');
+
+    expect(store.filteredTodos.map((t) => t.title)).toEqual(['Work task', 'Both']);
+  });
+
+  it('persists tags in localStorage', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('Tagged', { tags: ['work', 'urgent'] });
+
+    vi.advanceTimersByTime(300);
+
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '');
+    expect(saved.todos[0].tags).toEqual(['work', 'urgent']);
+  });
+
   it('persists due dates in localStorage', () => {
     const store = useTodosStore();
     store.hydrate();

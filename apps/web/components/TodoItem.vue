@@ -41,7 +41,14 @@ defineEmits<{
       >
         Due {{ todo.dueDate }}
       </small>
-      <span v-for="tag in todo.tags" :key="tag" class="badge bg-secondary me-1">{{ tag }}</span>
+      <span
+        v-for="tag in todo.tags"
+        :key="tag"
+        class="badge bg-secondary me-1"
+        data-testid="todo-tag-badge"
+      >
+        {{ tag }}
+      </span>
     </div>
     <button
       type="button"
