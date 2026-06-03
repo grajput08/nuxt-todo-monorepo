@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import type { Todo } from '@symb-abm/shared';
-import { normalizeTitle, normalizeTags, sortByOrder } from '@symb-abm/shared';
+import type { Todo, TodoFilter } from '@symb-abm/shared';
+import { filterTodos, normalizeTitle, normalizeTags, sortByOrder } from '@symb-abm/shared';
 import {
   PERSIST_DEBOUNCE_MS,
   createDebouncedFn,
@@ -14,8 +14,11 @@ export type AddTodoResult = { ok: true; id: string } | { ok: false; error: strin
 export const useTodosStore = defineStore('todos', () => {
   const todos = ref<Todo[]>([]);
   const hydrated = ref(false);
+  const filter = ref<TodoFilter>('all');
 
   const sortedTodos = computed(() => sortByOrder(todos.value));
+
+  const filteredTodos = computed(() => filterTodos(sortedTodos.value, filter.value));
 
   const counts = computed(() => {
     const total = todos.value.length;
@@ -88,14 +91,27 @@ export const useTodosStore = defineStore('todos', () => {
     schedulePersist();
   }
 
+  function setFilter(next: TodoFilter): void {
+    filter.value = next;
+  }
+
+  function clearCompleted(): void {
+    todos.value = todos.value.filter((todo) => !todo.completed);
+    schedulePersist();
+  }
+
   return {
     todos,
     sortedTodos,
+    filteredTodos,
+    filter,
     counts,
     hydrated,
     hydrate,
     addTodo,
     toggleTodo,
     removeTodo,
+    setFilter,
+    clearCompleted,
   };
 });

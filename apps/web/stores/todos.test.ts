@@ -91,6 +91,51 @@ describe('useTodosStore', () => {
     expect(store.todos).toHaveLength(0);
   });
 
+  it('filters todos by active and completed', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('Active one');
+    store.addTodo('Done one');
+    store.toggleTodo(store.todos.find((t) => t.title === 'Done one')!.id);
+
+    store.setFilter('active');
+    expect(store.filteredTodos.map((t) => t.title)).toEqual(['Active one']);
+
+    store.setFilter('completed');
+    expect(store.filteredTodos.map((t) => t.title)).toEqual(['Done one']);
+
+    store.setFilter('all');
+    expect(store.filteredTodos).toHaveLength(2);
+  });
+
+  it('clearCompleted removes only completed todos and persists', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('Keep');
+    store.addTodo('Remove');
+    store.toggleTodo(store.todos.find((t) => t.title === 'Remove')!.id);
+
+    store.clearCompleted();
+    expect(store.todos.map((t) => t.title)).toEqual(['Keep']);
+
+    vi.advanceTimersByTime(300);
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '');
+    expect(saved.todos).toHaveLength(1);
+    expect(saved.todos[0].title).toBe('Keep');
+  });
+
+  it('does not persist filter state to localStorage', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('A');
+    store.setFilter('active');
+    vi.advanceTimersByTime(300);
+
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '');
+    expect(saved.filter).toBeUndefined();
+    expect(store.filter).toBe('active');
+  });
+
   it('toggles and removes todos', () => {
     const store = useTodosStore();
     store.hydrate();

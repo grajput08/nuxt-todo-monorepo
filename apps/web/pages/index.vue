@@ -18,6 +18,7 @@ const store = useTodosStore();
     </header>
 
     <TodoForm class="mb-4" />
+    <TodoFilters />
     <TodoList />
   </main>
 </template>

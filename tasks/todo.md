@@ -43,7 +43,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 - [x] **Task 7:** Slice A — CRUD UI (form, list, item)
   - **Verify:** Manual add/toggle/delete; component tests
 
-- [ ] **Task 8:** Slice B — Filters + clear completed
+- [x] **Task 8:** Slice B — Filters + clear completed
   - **Verify:** Manual filter flow; getter tests
 
 ### Checkpoint: Core flow
