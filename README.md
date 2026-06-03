@@ -21,13 +21,13 @@ pnpm install
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start Nuxt dev server (`apps/web`, Task 3+) |
-| `pnpm build` | Build all workspaces |
-| `pnpm test` | Workspace verification + unit tests (as added) |
-| `pnpm lint` | ESLint (Task 4+) |
-| `pnpm typecheck` | TypeScript check (Task 3+) |
+| Command          | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| `pnpm dev`       | Start Nuxt dev server (`apps/web`, Task 3+)    |
+| `pnpm build`     | Build all workspaces                           |
+| `pnpm test`      | Workspace verification + unit tests (as added) |
+| `pnpm lint`      | ESLint (Task 4+)                               |
+| `pnpm typecheck` | TypeScript check (Task 3+)                     |
 
 ## Repository layout
 
@@ -49,4 +49,5 @@ Remote: `https://github.com/grajput08/nuxt-todo-monorepo`
 - [x] Task 1: Monorepo bootstrap
 - [x] Task 2: `@symb-abm/shared` package
 - [x] Task 3: Nuxt 3 app shell (`apps/web`)
-- [ ] Task 4+: See [tasks/todo.md](./tasks/todo.md)
+- [x] Task 4: ESLint, Prettier, Husky, lint-staged
+- [ ] Task 5+: See [tasks/todo.md](./tasks/todo.md)

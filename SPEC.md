@@ -2,16 +2,16 @@
 
 ## Confirmed decisions
 
-| Topic | Decision |
-|-------|----------|
-| **Repository** | New GitHub repository (greenfield; not inside `agent-skills`) |
-| **Persistence** | `localStorage` only — no server DB or sync |
-| **Authentication** | Out of scope for v1 |
-| **Monorepo** | Plain **pnpm workspaces** (no Turborepo) |
-| **Bootstrap** | Bootstrap 5 **CSS + JS** (modals, dropdowns, etc.) |
-| **E2E** | **Playwright** in MVP CI |
-| **Todo extras** | **Due dates**, **tags**, **drag-and-drop reorder** in v1 |
-| **Package scope** | **`@symb-abm/*`** (e.g. `@symb-abm/shared`) |
+| Topic              | Decision                                                      |
+| ------------------ | ------------------------------------------------------------- |
+| **Repository**     | New GitHub repository (greenfield; not inside `agent-skills`) |
+| **Persistence**    | `localStorage` only — no server DB or sync                    |
+| **Authentication** | Out of scope for v1                                           |
+| **Monorepo**       | Plain **pnpm workspaces** (no Turborepo)                      |
+| **Bootstrap**      | Bootstrap 5 **CSS + JS** (modals, dropdowns, etc.)            |
+| **E2E**            | **Playwright** in MVP CI                                      |
+| **Todo extras**    | **Due dates**, **tags**, **drag-and-drop reorder** in v1      |
+| **Package scope**  | **`@symb-abm/*`** (e.g. `@symb-abm/shared`)                   |
 
 Copy this file into the new repo root when scaffolding.
 
@@ -28,19 +28,19 @@ Build a **Todo application** as a **Nuxt 3 monorepo** in a **new GitHub reposito
 
 ### Core features (v1)
 
-| Feature | Acceptance criteria |
-|--------|---------------------|
-| List todos | Empty state and populated list; total / active / completed counts visible |
-| Add todo | Title required (trimmed, 1–200 chars); Enter and button submit |
-| Toggle complete | Checkbox updates visual state and `localStorage` |
-| Edit todo | Bootstrap modal or inline edit; save/cancel; empty title rejected |
-| Delete todo | Remove single todo (no confirmation dialog by default) |
-| Filter | All / Active / Completed with correct counts |
-| Clear completed | Removes all completed items in one action |
-| **Due date** | Optional date per todo; date picker in add/edit UI; overdue items visually distinct (e.g. `text-danger`); sort/filter by due optional (sort by due within list is enough for v1) |
-| **Tags** | Add/remove string tags per todo (normalized: trim, lowercase, max 30 chars, max 10 tags per todo); display as Bootstrap badges; filter list by selected tag(s) |
-| **Reorder** | Drag-and-drop reorder within the list; `order` field persisted; order stable after refresh |
-| Persist | Refresh restores todos, tags, due dates, and order from `localStorage` |
+| Feature         | Acceptance criteria                                                                                                                                                              |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| List todos      | Empty state and populated list; total / active / completed counts visible                                                                                                        |
+| Add todo        | Title required (trimmed, 1–200 chars); Enter and button submit                                                                                                                   |
+| Toggle complete | Checkbox updates visual state and `localStorage`                                                                                                                                 |
+| Edit todo       | Bootstrap modal or inline edit; save/cancel; empty title rejected                                                                                                                |
+| Delete todo     | Remove single todo (no confirmation dialog by default)                                                                                                                           |
+| Filter          | All / Active / Completed with correct counts                                                                                                                                     |
+| Clear completed | Removes all completed items in one action                                                                                                                                        |
+| **Due date**    | Optional date per todo; date picker in add/edit UI; overdue items visually distinct (e.g. `text-danger`); sort/filter by due optional (sort by due within list is enough for v1) |
+| **Tags**        | Add/remove string tags per todo (normalized: trim, lowercase, max 30 chars, max 10 tags per todo); display as Bootstrap badges; filter list by selected tag(s)                   |
+| **Reorder**     | Drag-and-drop reorder within the list; `order` field persisted; order stable after refresh                                                                                       |
+| Persist         | Refresh restores todos, tags, due dates, and order from `localStorage`                                                                                                           |
 
 ### Out of scope (v1)
 
@@ -65,22 +65,22 @@ Build a **Todo application** as a **Nuxt 3 monorepo** in a **new GitHub reposito
 
 ## Tech Stack
 
-| Layer | Choice | Notes |
-|-------|--------|--------|
-| Framework | Nuxt 3 (latest stable) | `apps/web` |
-| Language | TypeScript (strict) | `vue-tsc` / Nuxt typecheck |
-| UI | Bootstrap 5.3 CSS + JS | Client plugin; modals for edit, dropdowns where needed |
-| Drag-and-drop | `vue-draggable-plus` (or `@vueuse/integrations` + Sortable) | List reorder only |
-| State | Pinia | Todo store + `localStorage` hydration/sync |
-| Monorepo | pnpm workspaces | No Turborepo |
-| Shared package | `@symb-abm/shared` | Types, pure utils, validation helpers |
-| Lint | ESLint 9 flat config | `@nuxt/eslint` or Nuxt-aligned setup |
-| Format | Prettier | `eslint-config-prettier` |
-| Git hooks | Husky + lint-staged | Pre-commit on staged files |
-| CI | GitHub Actions | Lint, format, typecheck, Vitest, Playwright, build |
-| Deploy | Vercel | Root directory `apps/web` |
-| Unit/component | Vitest + `@vue/test-utils` | Shared + web app |
-| E2E | Playwright (`@nuxt/test-utils` e2e or standalone) | MVP required in CI |
+| Layer          | Choice                                                      | Notes                                                  |
+| -------------- | ----------------------------------------------------------- | ------------------------------------------------------ |
+| Framework      | Nuxt 3 (latest stable)                                      | `apps/web`                                             |
+| Language       | TypeScript (strict)                                         | `vue-tsc` / Nuxt typecheck                             |
+| UI             | Bootstrap 5.3 CSS + JS                                      | Client plugin; modals for edit, dropdowns where needed |
+| Drag-and-drop  | `vue-draggable-plus` (or `@vueuse/integrations` + Sortable) | List reorder only                                      |
+| State          | Pinia                                                       | Todo store + `localStorage` hydration/sync             |
+| Monorepo       | pnpm workspaces                                             | No Turborepo                                           |
+| Shared package | `@symb-abm/shared`                                          | Types, pure utils, validation helpers                  |
+| Lint           | ESLint 9 flat config                                        | `@nuxt/eslint` or Nuxt-aligned setup                   |
+| Format         | Prettier                                                    | `eslint-config-prettier`                               |
+| Git hooks      | Husky + lint-staged                                         | Pre-commit on staged files                             |
+| CI             | GitHub Actions                                              | Lint, format, typecheck, Vitest, Playwright, build     |
+| Deploy         | Vercel                                                      | Root directory `apps/web`                              |
+| Unit/component | Vitest + `@vue/test-utils`                                  | Shared + web app                                       |
+| E2E            | Playwright (`@nuxt/test-utils` e2e or standalone)           | MVP required in CI                                     |
 
 ### Version constraints
 
@@ -217,10 +217,10 @@ export interface Todo {
   id: TodoId;
   title: string;
   completed: boolean;
-  createdAt: string;       // ISO 8601
-  dueDate: string | null;  // ISO date (YYYY-MM-DD) or null
-  tags: string[];          // normalized lowercase strings
-  order: number;           // integer, lower = higher in list
+  createdAt: string; // ISO 8601
+  dueDate: string | null; // ISO date (YYYY-MM-DD) or null
+  tags: string[]; // normalized lowercase strings
+  order: number; // integer, lower = higher in list
 }
 
 export type TodoFilter = 'all' | 'active' | 'completed';
@@ -258,7 +258,12 @@ function isOverdue(todo: Todo): boolean {
       @change="$emit('toggle', todo.id)"
     />
     <div class="flex-grow-1">
-      <span :class="{ 'text-decoration-line-through text-muted': todo.completed, 'text-danger': isOverdue(todo) }">
+      <span
+        :class="{
+          'text-decoration-line-through text-muted': todo.completed,
+          'text-danger': isOverdue(todo),
+        }"
+      >
         {{ todo.title }}
       </span>
       <small v-if="todo.dueDate" class="d-block text-muted">{{ todo.dueDate }}</small>
@@ -283,12 +288,12 @@ function isOverdue(todo: Todo): boolean {
 
 ## Testing Strategy
 
-| Level | Tool | Location | What to cover |
-|-------|------|----------|----------------|
-| Unit | Vitest | `packages/shared/**/*.test.ts` | Tag normalize, filter/sort, overdue helper, reorder merge |
-| Component | Vitest + `@vue/test-utils` | `apps/web/tests/components/` | Tags, due date display, filter bar |
-| Store | Vitest | `apps/web/stores/*.test.ts` | CRUD, reorder, tag add/remove, persistence serialization |
-| E2E | Playwright | `apps/web/e2e/` | Add/edit/complete/delete; tag filter; drag reorder persists after reload |
+| Level     | Tool                       | Location                       | What to cover                                                            |
+| --------- | -------------------------- | ------------------------------ | ------------------------------------------------------------------------ |
+| Unit      | Vitest                     | `packages/shared/**/*.test.ts` | Tag normalize, filter/sort, overdue helper, reorder merge                |
+| Component | Vitest + `@vue/test-utils` | `apps/web/tests/components/`   | Tags, due date display, filter bar                                       |
+| Store     | Vitest                     | `apps/web/stores/*.test.ts`    | CRUD, reorder, tag add/remove, persistence serialization                 |
+| E2E       | Playwright                 | `apps/web/e2e/`                | Add/edit/complete/delete; tag filter; drag reorder persists after reload |
 
 **Coverage expectations**
 

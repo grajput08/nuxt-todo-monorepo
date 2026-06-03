@@ -4,9 +4,7 @@ export const TAG_MAX_LENGTH = 30;
 export const TAG_MAX_COUNT = 10;
 export const TITLE_MAX_LENGTH = 200;
 
-export type NormalizeTitleResult =
-  | { ok: true; title: string }
-  | { ok: false; error: string };
+export type NormalizeTitleResult = { ok: true; title: string } | { ok: false; error: string };
 
 export function normalizeTag(tag: string): string | null {
   const normalized = tag.trim().toLowerCase();

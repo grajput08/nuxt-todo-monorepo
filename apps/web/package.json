@@ -4,11 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build",
+    "dev": "TMPDIR=/tmp nuxt dev",
+    "build": "NUXT_IGNORE_LOCK=1 nuxt build",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
-    "test": "nuxt prepare && vitest run"
+    "test": "nuxt prepare && vitest run",
+    "lint": "nuxt prepare && eslint .",
+    "lint:fix": "nuxt prepare && eslint . --fix"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.11.1",
@@ -19,7 +21,9 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^1.4.1",
     "@types/node": "^22.15.32",
+    "eslint": "^9.30.1",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4",
     "vue-tsc": "^2.2.10"

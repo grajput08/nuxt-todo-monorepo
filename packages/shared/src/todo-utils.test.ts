@@ -45,7 +45,18 @@ describe('normalizeTags', () => {
     const input = [' Work ', 'work', 'HOME', '', 'a'.repeat(31)];
     for (let i = 0; i < 12; i++) input.push(`tag${i}`);
     const result = normalizeTags(input);
-    expect(result).toEqual(['work', 'home', 'tag0', 'tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7']);
+    expect(result).toEqual([
+      'work',
+      'home',
+      'tag0',
+      'tag1',
+      'tag2',
+      'tag3',
+      'tag4',
+      'tag5',
+      'tag6',
+      'tag7',
+    ]);
     expect(result).toHaveLength(10);
   });
 });
@@ -116,9 +127,9 @@ describe('isOverdue', () => {
     expect(isOverdue(baseTodo(), '2026-06-02')).toBe(false);
     expect(isOverdue(baseTodo({ dueDate: '2026-06-02' }), '2026-06-02')).toBe(false);
     expect(isOverdue(baseTodo({ dueDate: '2026-06-03' }), '2026-06-02')).toBe(false);
-    expect(
-      isOverdue(baseTodo({ dueDate: '2026-06-01', completed: true }), '2026-06-02'),
-    ).toBe(false);
+    expect(isOverdue(baseTodo({ dueDate: '2026-06-01', completed: true }), '2026-06-02')).toBe(
+      false,
+    );
   });
 
   it('is true when due date is before today and todo is incomplete', () => {

@@ -22,10 +22,11 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 - [x] **Task 3:** Nuxt 3 app shell (`apps/web`) + Pinia + shared link
   - **Verify:** `pnpm dev`, `pnpm --filter web build`
 
-- [ ] **Task 4:** ESLint, Prettier, Husky, lint-staged
+- [x] **Task 4:** ESLint, Prettier, Husky, lint-staged
   - **Verify:** `pnpm lint`; bad commit blocked
 
 ### Checkpoint: Foundation
+
 - [ ] Dev server runs; shared tests pass; hooks work
 - [ ] Human sign-off
 
@@ -46,6 +47,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
   - **Verify:** Manual filter flow; getter tests
 
 ### Checkpoint: Core flow
+
 - [ ] CRUD + filter + persist after refresh
 - [ ] Human sign-off
 
@@ -66,6 +68,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
   - **Verify:** Reorder survives reload
 
 ### Checkpoint: Feature complete
+
 - [ ] All SPEC v1 features in browser
 - [ ] `pnpm lint` + `pnpm typecheck` + `pnpm test` green
 - [ ] Human sign-off
@@ -81,6 +84,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
   - **Verify:** Actions green on push
 
 ### Checkpoint: CI
+
 - [ ] Full pipeline green on `main`
 - [ ] Human sign-off
 
@@ -95,6 +99,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
   - **Verify:** Keyboard smoke test; SPEC checklist done
 
 ### Checkpoint: Complete
+
 - [ ] All SPEC success criteria met
 - [ ] Ready for production use / review
 
