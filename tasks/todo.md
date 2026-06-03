@@ -37,7 +37,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 - [x] **Task 5:** Pinia store + `localStorage` (`symb-todos-v1`)
   - **Verify:** `pnpm test` (store tests)
 
-- [ ] **Task 6:** Bootstrap CSS + JS client plugin
+- [x] **Task 6:** Bootstrap CSS + JS client plugin
   - **Verify:** Styled page; modal/dropdown smoke test
 
 - [ ] **Task 7:** Slice A — CRUD UI (form, list, item)
