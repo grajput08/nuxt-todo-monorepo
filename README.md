@@ -52,4 +52,5 @@ Remote: `https://github.com/grajput08/nuxt-todo-monorepo`
 - [x] Task 4: ESLint, Prettier, Husky, lint-staged
 - [x] Task 5: Pinia store + localStorage persistence
 - [x] Task 6: Bootstrap CSS + JS
-- [ ] Task 7+: See [tasks/todo.md](./tasks/todo.md)
+- [x] Task 7: Todo CRUD UI
+- [ ] Task 8+: See [tasks/todo.md](./tasks/todo.md)

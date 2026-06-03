@@ -26,10 +26,10 @@ describe('Bootstrap setup', () => {
     expect(plugin).toMatch(/import\.meta\.server/);
   });
 
-  it('includes Bootstrap smoke-test controls on the home page', () => {
+  it('wires the todo CRUD UI on the home page', () => {
     const page = readWeb('pages/index.vue');
-    expect(page).toMatch(/data-bs-toggle="dropdown"/);
-    expect(page).toMatch(/data-bs-toggle="modal"/);
-    expect(page).toMatch(/id="bootstrapSmokeModal"/);
+    expect(page).toMatch(/TodoForm/);
+    expect(page).toMatch(/TodoList/);
+    expect(page).toMatch(/todo-counts/);
   });
 });

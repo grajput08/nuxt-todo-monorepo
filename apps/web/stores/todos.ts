@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import type { Todo } from '@symb-abm/shared';
 import { normalizeTitle, normalizeTags, sortByOrder } from '@symb-abm/shared';
 import {
@@ -14,6 +14,18 @@ export type AddTodoResult = { ok: true; id: string } | { ok: false; error: strin
 export const useTodosStore = defineStore('todos', () => {
   const todos = ref<Todo[]>([]);
   const hydrated = ref(false);
+
+  const sortedTodos = computed(() => sortByOrder(todos.value));
+
+  const counts = computed(() => {
+    const total = todos.value.length;
+    const completed = todos.value.filter((todo) => todo.completed).length;
+    return {
+      total,
+      active: total - completed,
+      completed,
+    };
+  });
 
   const schedulePersist = createDebouncedFn(() => {
     if (import.meta.server) {
@@ -78,6 +90,8 @@ export const useTodosStore = defineStore('todos', () => {
 
   return {
     todos,
+    sortedTodos,
+    counts,
     hydrated,
     hydrate,
     addTodo,
