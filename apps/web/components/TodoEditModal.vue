@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
   >
     <div class="modal-dialog">
       <div class="modal-content">
-        <form @submit.prevent="submit">
+        <form data-testid="todo-edit-form" @submit.prevent="submit">
           <div class="modal-header">
             <h2 id="todo-edit-modal-title" class="modal-title h5">Edit todo</h2>
             <button

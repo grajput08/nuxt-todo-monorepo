@@ -9,6 +9,8 @@
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
     "test": "nuxt prepare && vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "lint": "nuxt prepare && eslint .",
     "lint:fix": "nuxt prepare && eslint . --fix"
   },
@@ -24,6 +26,7 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.52.0",
     "@nuxt/eslint": "^1.4.1",
     "@types/bootstrap": "^5.2.11",
     "@types/node": "^22.15.32",

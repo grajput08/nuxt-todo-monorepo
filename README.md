@@ -58,4 +58,5 @@ Remote: `https://github.com/grajput08/nuxt-todo-monorepo`
 - [x] Task 10: Tags + tag filter
 - [x] Task 11: Edit modal (Bootstrap JS)
 - [x] Task 12: Drag-and-drop reorder
-- [ ] Task 13+: See [tasks/todo.md](./tasks/todo.md)
+- [x] Task 13: Playwright E2E suite
+- [ ] Task 14+: See [tasks/todo.md](./tasks/todo.md)

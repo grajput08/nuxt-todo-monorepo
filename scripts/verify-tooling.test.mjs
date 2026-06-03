@@ -18,6 +18,7 @@ test('root package scripts wire lint, format, and husky prepare', () => {
   assert.equal(pkg.scripts['format:check'], 'prettier --check .');
   assert.match(pkg.scripts['lint:fix'], /eslint \. --fix/);
   assert.match(pkg.scripts.lint, /pnpm --filter web lint/);
+  assert.match(pkg.scripts['test:e2e'], /pnpm --filter web test:e2e/);
 });
 
 test('eslint, prettier, husky, and lint-staged config files exist', () => {
@@ -36,4 +37,18 @@ test('eslint, prettier, husky, and lint-staged config files exist', () => {
 test('Nuxt app registers @nuxt/eslint module', () => {
   const config = read('apps/web/nuxt.config.ts');
   assert.match(config, /@nuxt\/eslint/);
+});
+
+test('Playwright e2e is configured for the web app', () => {
+  const webPkg = JSON.parse(read('apps/web/package.json'));
+  assert.ok(webPkg.devDependencies['@playwright/test']);
+  assert.match(webPkg.scripts['test:e2e'], /playwright test/);
+  for (const file of [
+    'apps/web/playwright.config.ts',
+    'apps/web/e2e/todo-crud.spec.ts',
+    'apps/web/e2e/todo-tags.spec.ts',
+    'apps/web/e2e/todo-reorder.spec.ts',
+  ]) {
+    assert.ok(existsSync(join(root, file)), `missing ${file}`);
+  }
 });

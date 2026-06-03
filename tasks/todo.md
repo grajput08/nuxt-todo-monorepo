@@ -77,7 +77,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 
 ## Phase 4: E2E & CI
 
-- [ ] **Task 13:** Playwright — 4 E2E scenarios + `data-testid`s
+- [x] **Task 13:** Playwright — 4 E2E scenarios + `data-testid`s
   - **Verify:** `pnpm test:e2e`
 
 - [ ] **Task 14:** GitHub Actions `ci.yml`

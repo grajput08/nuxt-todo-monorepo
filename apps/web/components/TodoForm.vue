@@ -25,7 +25,7 @@ function submit(): void {
 </script>
 
 <template>
-  <form @submit.prevent="submit">
+  <form data-testid="todo-form" @submit.prevent="submit">
     <div class="row g-2 align-items-end">
       <div class="col-md-6">
         <label class="form-label visually-hidden" for="todo-title-input">New todo</label>
