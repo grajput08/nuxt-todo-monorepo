@@ -3,6 +3,10 @@ import { useTodosStore } from '~/stores/todos';
 
 const store = useTodosStore();
 
+const emit = defineEmits<{
+  edit: [id: string];
+}>();
+
 function onToggle(id: string): void {
   store.toggleTodo(id);
 }
@@ -24,6 +28,7 @@ function onRemove(id: string): void {
         :key="todo.id"
         :todo="todo"
         @toggle="onToggle"
+        @edit="emit('edit', $event)"
         @remove="onRemove"
       />
     </ul>

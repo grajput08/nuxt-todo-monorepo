@@ -172,6 +172,41 @@ describe('useTodosStore', () => {
     expect(saved.todos[0].dueDate).toBe('2026-07-01');
   });
 
+  it('updates title, due date, and tags', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('Original', { dueDate: '2026-06-01', tags: ['work'] });
+    const id = store.todos[0]!.id;
+
+    const result = store.updateTodo(id, {
+      title: '  Updated  ',
+      dueDate: '2026-07-01',
+      tags: ['home', 'urgent'],
+    });
+
+    expect(result.ok).toBe(true);
+    expect(store.todos[0]).toMatchObject({
+      title: 'Updated',
+      dueDate: '2026-07-01',
+      tags: ['home', 'urgent'],
+    });
+
+    vi.advanceTimersByTime(300);
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '');
+    expect(saved.todos[0].title).toBe('Updated');
+  });
+
+  it('rejects invalid titles on update', () => {
+    const store = useTodosStore();
+    store.hydrate();
+    store.addTodo('Keep');
+    const id = store.todos[0]!.id;
+
+    const result = store.updateTodo(id, { title: '   ' });
+    expect(result.ok).toBe(false);
+    expect(store.todos[0]?.title).toBe('Keep');
+  });
+
   it('toggles and removes todos', () => {
     const store = useTodosStore();
     store.hydrate();

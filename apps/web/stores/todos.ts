@@ -16,6 +16,7 @@ import {
 } from '../composables/useLocalStorageSync';
 
 export type AddTodoResult = { ok: true; id: string } | { ok: false; error: string };
+export type UpdateTodoResult = { ok: true } | { ok: false; error: string };
 
 export const useTodosStore = defineStore('todos', () => {
   const todos = ref<Todo[]>([]);
@@ -98,6 +99,37 @@ export const useTodosStore = defineStore('todos', () => {
     return { ok: true, id: todo.id };
   }
 
+  function updateTodo(
+    id: string,
+    patch: { title: string; dueDate?: string | null; tags?: string[] },
+  ): UpdateTodoResult {
+    const normalized = normalizeTitle(patch.title);
+    if (!normalized.ok) {
+      return { ok: false, error: normalized.error };
+    }
+
+    const exists = todos.value.some((todo) => todo.id === id);
+    if (!exists) {
+      return { ok: false, error: 'Todo not found' };
+    }
+
+    todos.value = sortByDueThenOrder(
+      todos.value.map((todo) =>
+        todo.id === id
+          ? {
+              ...todo,
+              title: normalized.title,
+              dueDate: normalizeDueDate(patch.dueDate ?? todo.dueDate),
+              tags: normalizeTags(patch.tags ?? todo.tags),
+            }
+          : todo,
+      ),
+    );
+    schedulePersist();
+
+    return { ok: true };
+  }
+
   function toggleTodo(id: string): void {
     todos.value = todos.value.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo,
@@ -142,6 +174,7 @@ export const useTodosStore = defineStore('todos', () => {
     hydrated,
     hydrate,
     addTodo,
+    updateTodo,
     toggleTodo,
     removeTodo,
     setFilter,

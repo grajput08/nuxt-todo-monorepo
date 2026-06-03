@@ -8,6 +8,7 @@ defineProps<{
 
 defineEmits<{
   toggle: [id: string];
+  edit: [id: string];
   remove: [id: string];
 }>();
 </script>
@@ -50,6 +51,14 @@ defineEmits<{
         {{ tag }}
       </span>
     </div>
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-primary flex-shrink-0"
+      data-testid="todo-edit"
+      @click="$emit('edit', todo.id)"
+    >
+      Edit
+    </button>
     <button
       type="button"
       class="btn btn-sm btn-outline-danger flex-shrink-0"

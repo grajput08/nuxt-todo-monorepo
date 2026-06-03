@@ -24,6 +24,16 @@ describe('TodoItem', () => {
     expect(wrapper.emitted('toggle')).toEqual([['todo-1']]);
   });
 
+  it('emits edit when Edit is clicked', async () => {
+    const wrapper = mount(TodoItem, {
+      props: { todo },
+    });
+
+    await wrapper.get('[data-testid="todo-edit"]').trigger('click');
+
+    expect(wrapper.emitted('edit')).toEqual([['todo-1']]);
+  });
+
   it('emits remove when Delete is clicked', async () => {
     const wrapper = mount(TodoItem, {
       props: { todo },

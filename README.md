@@ -56,4 +56,5 @@ Remote: `https://github.com/grajput08/nuxt-todo-monorepo`
 - [x] Task 8: Filters + clear completed
 - [x] Task 9: Due dates + overdue styling
 - [x] Task 10: Tags + tag filter
-- [ ] Task 11+: See [tasks/todo.md](./tasks/todo.md)
+- [x] Task 11: Edit modal (Bootstrap JS)
+- [ ] Task 12+: See [tasks/todo.md](./tasks/todo.md)

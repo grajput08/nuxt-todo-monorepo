@@ -30,6 +30,7 @@ describe('Bootstrap setup', () => {
     const page = readWeb('pages/index.vue');
     expect(page).toMatch(/TodoForm/);
     expect(page).toMatch(/TodoList/);
+    expect(page).toMatch(/TodoEditModal/);
     expect(page).toMatch(/todo-counts/);
   });
 });

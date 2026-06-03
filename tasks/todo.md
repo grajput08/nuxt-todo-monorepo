@@ -61,7 +61,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 - [x] **Task 10:** Slice D — Tags + tag filter
   - **Verify:** Tags persist; filter by tag works
 
-- [ ] **Task 11:** Slice E — Edit modal (Bootstrap JS)
+- [x] **Task 11:** Slice E — Edit modal (Bootstrap JS)
   - **Verify:** Edit title/due/tags via modal
 
 - [ ] **Task 12:** Slice F — Drag-and-drop reorder
