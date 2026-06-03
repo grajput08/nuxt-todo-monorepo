@@ -50,4 +50,5 @@ Remote: `https://github.com/grajput08/nuxt-todo-monorepo`
 - [x] Task 2: `@symb-abm/shared` package
 - [x] Task 3: Nuxt 3 app shell (`apps/web`)
 - [x] Task 4: ESLint, Prettier, Husky, lint-staged
-- [ ] Task 5+: See [tasks/todo.md](./tasks/todo.md)
+- [x] Task 5: Pinia store + localStorage persistence
+- [ ] Task 6+: See [tasks/todo.md](./tasks/todo.md)

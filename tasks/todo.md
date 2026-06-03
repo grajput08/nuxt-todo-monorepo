@@ -34,7 +34,7 @@ Track implementation in the **new GitHub repo**. Full detail: [plan.md](./plan.m
 
 ## Phase 2: Core todos
 
-- [ ] **Task 5:** Pinia store + `localStorage` (`symb-todos-v1`)
+- [x] **Task 5:** Pinia store + `localStorage` (`symb-todos-v1`)
   - **Verify:** `pnpm test` (store tests)
 
 - [ ] **Task 6:** Bootstrap CSS + JS client plugin

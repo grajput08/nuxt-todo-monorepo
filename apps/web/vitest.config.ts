@@ -6,7 +6,7 @@ const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   test: {
-    include: ['tests/**/*.test.ts'],
+    include: ['tests/**/*.test.ts', 'stores/**/*.test.ts'],
     typecheck: {
       tsconfig: './tsconfig.vitest.json',
     },
